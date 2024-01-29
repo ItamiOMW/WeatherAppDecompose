@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
@@ -5,6 +7,12 @@ plugins {
     alias(libs.plugins.kotlinSerializtion)
     alias(libs.plugins.ksp)
     alias(libs.plugins.daggerHilt)
+}
+
+val localProperties = Properties()
+val localPropertiesFile: File = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
 }
 
 android {
@@ -22,6 +30,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val apiKey = localProperties.getProperty("API_KEY")
+        buildConfigField(type = "String", "API_KEY", value = "\"$apiKey\"")
     }
 
     buildTypes {
@@ -42,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.7"
