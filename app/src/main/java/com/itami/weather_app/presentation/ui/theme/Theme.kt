@@ -1,4 +1,4 @@
-package com.itami.weather_app.ui.theme
+package com.itami.weather_app.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
