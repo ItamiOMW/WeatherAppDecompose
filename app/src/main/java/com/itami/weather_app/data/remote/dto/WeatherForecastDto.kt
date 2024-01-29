@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class WeatherForecastDto(
     @SerializedName("current")
-    val weather: WeatherDto,
+    val weatherDto: WeatherDto,
     @SerializedName("forecast")
-    val forecast: ForecastDto,
+    val forecastDto: ForecastDto,
 )

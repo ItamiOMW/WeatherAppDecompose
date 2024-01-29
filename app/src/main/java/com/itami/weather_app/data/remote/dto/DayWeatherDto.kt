@@ -6,5 +6,5 @@ data class DayWeatherDto(
     @SerializedName("avgtemp_c")
     val tempC: Float,
     @SerializedName("condition")
-    val condition: ConditionDto
+    val conditionDto: ConditionDto
 )
