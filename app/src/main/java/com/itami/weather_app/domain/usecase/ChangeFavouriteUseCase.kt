@@ -7,12 +7,12 @@ class ChangeFavouriteUseCase(
     private val favouriteRepository: FavouriteRepository
 ) {
 
-    suspend fun addToFavourite(city: City) {
-        favouriteRepository.addToFavourite(city = city)
-    }
-
-    suspend fun removeFromFavourite(cityId: Int) {
-        favouriteRepository.removeFromFavourite(cityId = cityId)
+    suspend operator fun invoke(city: City, isFavouriteNow: Boolean) {
+        if (isFavouriteNow) {
+            favouriteRepository.removeFromFavourite(cityId = city.id)
+        } else {
+            favouriteRepository.addToFavourite(city = city)
+        }
     }
 
 }
