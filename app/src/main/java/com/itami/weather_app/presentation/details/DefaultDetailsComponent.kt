@@ -6,17 +6,19 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.itami.weather_app.domain.model.City
 import com.itami.weather_app.presentation.root.scope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DefaultDetailsComponent @Inject constructor(
-    private val componentContext: ComponentContext,
+class DefaultDetailsComponent @AssistedInject constructor(
     private val detailStoreFactory: DetailsStoreFactory,
-    private val city: City,
-    private val onNavigateBack: () -> Unit,
+    @Assisted("city") private val city: City,
+    @Assisted("onNavigateBack") private val onNavigateBack: () -> Unit,
+    @Assisted("componentContext") componentContext: ComponentContext,
 ) : DetailsComponent, ComponentContext by componentContext {
 
     private val store = instanceKeeper.getStore { detailStoreFactory.create(city = city) }
@@ -44,4 +46,14 @@ class DefaultDetailsComponent @Inject constructor(
         store.accept(DetailsStore.Intent.ChangeFavouriteClick)
     }
 
+    @AssistedFactory
+    interface Factory {
+
+        fun create(
+            @Assisted("city") city: City,
+            @Assisted("onNavigateBack") onNavigateBack: () -> Unit,
+            @Assisted("componentContext") componentContext: ComponentContext,
+        ): DefaultDetailsComponent
+
+    }
 }

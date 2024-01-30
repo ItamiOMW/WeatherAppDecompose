@@ -6,19 +6,21 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.itami.weather_app.domain.model.City
 import com.itami.weather_app.presentation.root.scope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DefaultSearchComponent @Inject constructor(
-    private val componentContext: ComponentContext,
+class DefaultSearchComponent @AssistedInject constructor(
     private val searchStoreFactory: SearchStoreFactory,
-    private val searchMode: SearchMode,
-    private val onNavigateBack: () -> Unit,
-    private val onCitySavedToFavourite: () -> Unit,
-    private val onOpenCityForecast: (City) -> Unit,
+    @Assisted("searchMode") private val searchMode: SearchMode,
+    @Assisted("onNavigateBack") private val onNavigateBack: () -> Unit,
+    @Assisted("onCitySavedToFavourite") private val onCitySavedToFavourite: () -> Unit,
+    @Assisted("onOpenCityForecast") private val onOpenCityForecast: (City) -> Unit,
+    @Assisted("componentContext") componentContext: ComponentContext,
 ) : SearchComponent, ComponentContext by componentContext {
 
     private val store = instanceKeeper.getStore { searchStoreFactory.create(searchMode) }
@@ -54,4 +56,16 @@ class DefaultSearchComponent @Inject constructor(
         store.accept(SearchStore.Intent.BackClick)
     }
 
+    @AssistedFactory
+    interface Factory {
+
+        fun create(
+            @Assisted("searchMode") searchMode: SearchMode,
+            @Assisted("onNavigateBack") onNavigateBack: () -> Unit,
+            @Assisted("onCitySavedToFavourite") onCitySavedToFavourite: () -> Unit,
+            @Assisted("onOpenCityForecast") onOpenCityForecast: (City) -> Unit,
+            @Assisted("componentContext") componentContext: ComponentContext,
+        ): DefaultSearchComponent
+
+    }
 }
