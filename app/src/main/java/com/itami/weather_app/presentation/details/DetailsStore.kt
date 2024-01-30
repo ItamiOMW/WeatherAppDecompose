@@ -17,7 +17,7 @@ import com.itami.weather_app.presentation.details.DetailsStore.State
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal interface DetailsStore : Store<Intent, State, Label> {
+interface DetailsStore : Store<Intent, State, Label> {
 
     data class State(
         val city: City,
@@ -55,7 +55,7 @@ internal interface DetailsStore : Store<Intent, State, Label> {
     }
 }
 
-internal class DetailsStoreFactory @Inject constructor(
+class DetailsStoreFactory @Inject constructor(
     private val storeFactory: StoreFactory,
     private val changeFavouriteUseCase: ChangeFavouriteUseCase,
     private val observeIsFavouriteUseCase: ObserveIsFavouriteUseCase,

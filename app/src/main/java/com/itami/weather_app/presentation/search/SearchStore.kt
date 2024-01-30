@@ -55,6 +55,8 @@ interface SearchStore : Store<Intent, State, Label> {
 
         data object NavigateBack : Label
 
+        data object CitySavedToFavourite : Label
+
         data class OpenCityForecast(val city: City) : Label
 
     }
@@ -141,7 +143,7 @@ class SearchStoreFactory @Inject constructor(
                         SearchMode.AddToFavourite -> {
                             scope.launch {
                                 changeFavouriteUseCase.addToFavourite(city = intent.city)
-                                publish(Label.NavigateBack)
+                                publish(Label.CitySavedToFavourite)
                             }
                         }
                     }
