@@ -4,9 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import javax.inject.Inject
 
 class DefaultRootComponent @Inject constructor(
-    private val componentContext: ComponentContext
+    private val componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
-
-    
 
 }

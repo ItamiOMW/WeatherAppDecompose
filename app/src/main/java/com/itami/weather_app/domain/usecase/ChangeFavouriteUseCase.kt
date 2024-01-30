@@ -9,10 +9,18 @@ class ChangeFavouriteUseCase(
 
     suspend operator fun invoke(city: City, isFavouriteNow: Boolean) {
         if (isFavouriteNow) {
-            favouriteRepository.removeFromFavourite(cityId = city.id)
+            removeFromFavourite(cityId = city.id)
         } else {
-            favouriteRepository.addToFavourite(city = city)
+            addToFavourite(city = city)
         }
+    }
+
+    suspend fun addToFavourite(city: City) {
+        favouriteRepository.addToFavourite(city = city)
+    }
+
+    suspend fun removeFromFavourite(cityId: Int) {
+        favouriteRepository.removeFromFavourite(cityId = cityId)
     }
 
 }
