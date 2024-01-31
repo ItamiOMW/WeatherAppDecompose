@@ -15,13 +15,17 @@ class SearchRepositoryImpl @Inject constructor(
 ): SearchRepository {
 
     override suspend fun searchCity(query: String): AppResponse<List<City>> {
-        val response = weatherApiService.searchCity(query = query)
-        if (response.isSuccessful) {
-            val cities = response.body()?.toCityList() ?: emptyList()
-            return AppResponse.success(cities)
-        }
+        try {
+            val response = weatherApiService.searchCity(query = query)
+            if (response.isSuccessful) {
+                val cities = response.body()?.toCityList() ?: emptyList()
+                return AppResponse.success(cities)
+            }
 
-        return AppResponse.failed(application.getString(R.string.error_failed_to_load_cities))
+            return AppResponse.failed(application.getString(R.string.error_failed_to_load_cities))
+        } catch (e: Exception) {
+            return AppResponse.failed(application.getString(R.string.error_failed_to_load_cities))
+        }
     }
 
 }
