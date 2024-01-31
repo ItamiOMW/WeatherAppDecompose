@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.itami.weather_app.R
-import com.itami.weather_app.presentation.ui.theme.CardGradient
-import com.itami.weather_app.presentation.ui.theme.CardGradients
+import com.itami.weather_app.presentation.ui.theme.Gradient
+import com.itami.weather_app.presentation.ui.theme.gradients
 import com.itami.weather_app.utils.formatTempC
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -71,12 +71,13 @@ fun FavouriteContent(component: FavouriteComponent) {
             items = state.cityItems,
             key = { _, item -> item.city.id }
         ) { index, cityItem ->
+            val gradientsList = MaterialTheme.gradients.asList()
             CityCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .animateItemPlacement(),
                 cityItem = cityItem,
-                cardGradient = CardGradients.cardGradients[index % CardGradients.cardGradients.size],
+                gradient = gradientsList[index % gradientsList.size],
                 onClick = {
                     component.onCityItemClick(city = cityItem.city)
                 }
@@ -180,7 +181,7 @@ private fun CityCard(
     cityItem: FavouriteStore.State.CityItem,
     modifier: Modifier = Modifier,
     shape: Shape = MaterialTheme.shapes.extraLarge,
-    cardGradient: CardGradient = CardGradients.cardGradients.first(),
+    gradient: Gradient = MaterialTheme.gradients.orange,
     minHeight: Dp = 196.dp,
     onClick: () -> Unit,
 ) {
@@ -188,21 +189,21 @@ private fun CityCard(
         modifier = modifier
             .shadow(
                 elevation = 16.dp,
-                spotColor = cardGradient.shadowColor,
+                spotColor = gradient.shadowColor,
                 shape = shape
             ),
-        colors = CardDefaults.cardColors(contentColor = cardGradient.onGradients),
+        colors = CardDefaults.cardColors(contentColor = gradient.onGradients),
         shape = shape,
         onClick = onClick,
     ) {
         Box(
             modifier = Modifier
-                .background(brush = cardGradient.primaryGradient)
+                .background(brush = gradient.primaryGradient)
                 .fillMaxSize()
                 .sizeIn(minHeight = minHeight)
                 .drawBehind {
                     drawCircle(
-                        brush = cardGradient.secondaryGradient,
+                        brush = gradient.secondaryGradient,
                         radius = size.maxDimension / 1.8f,
                         center = Offset(x = size.width / 3f, y = size.height)
                     )
@@ -238,7 +239,7 @@ private fun CityCard(
                 is FavouriteStore.State.WeatherState.Loading -> {
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center),
-                        color = cardGradient.onGradients
+                        color = gradient.onGradients
                     )
                     Text(
                         modifier = Modifier.align(Alignment.BottomStart),
