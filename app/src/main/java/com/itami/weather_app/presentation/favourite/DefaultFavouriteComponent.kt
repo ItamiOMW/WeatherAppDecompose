@@ -5,7 +5,7 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.itami.weather_app.domain.model.City
-import com.itami.weather_app.presentation.root.scope
+import com.itami.weather_app.utils.scope
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -55,8 +55,8 @@ class DefaultFavouriteComponent @AssistedInject constructor(
         store.accept(FavouriteStore.Intent.AddFavouriteClick)
     }
 
-    override fun onCityItemClick(cityItem: City) {
-        store.accept(FavouriteStore.Intent.CityClick(cityItem))
+    override fun onCityItemClick(city: City) {
+        store.accept(FavouriteStore.Intent.CityClick(city))
     }
 
     @AssistedFactory

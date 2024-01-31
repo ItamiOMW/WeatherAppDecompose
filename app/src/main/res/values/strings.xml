@@ -3,4 +3,9 @@
     <string name="error_failed_to_load_cities">Failed to load cities.</string>
     <string name="error_failed_to_load_current_weather">Failed to load current weather.</string>
     <string name="error_failed_to_load_forecast">Failed to load forecast.</string>
+    <string name="desc_weather_condition_icon">Weather condition icon</string>
+    <string name="desc_edit_icon">Edit icon</string>
+    <string name="button_add_favourite">Add favourite</string>
+    <string name="desc_search_icon">Search icon</string>
+    <string name="hint_search">Search</string>
 </resources>

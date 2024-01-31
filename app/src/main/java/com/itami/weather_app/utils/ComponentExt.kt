@@ -1,4 +1,4 @@
-package com.itami.weather_app.presentation.root
+package com.itami.weather_app.utils
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.doOnDestroy
