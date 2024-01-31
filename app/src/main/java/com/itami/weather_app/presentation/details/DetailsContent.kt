@@ -246,7 +246,8 @@ private fun ForecastError() {
     ) {
         ErrorText(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.error_failed_to_load_current_weather)
+            text = stringResource(id = R.string.error_failed_to_load_current_weather),
+            color = MaterialTheme.gradients.purple.onGradients
         )
     }
 }

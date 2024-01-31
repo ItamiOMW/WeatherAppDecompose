@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.itami.weather_app.R
@@ -22,6 +23,7 @@ import com.itami.weather_app.presentation.ui.theme.gradients
 fun ErrorText(
     modifier: Modifier = Modifier,
     text: String = stringResource(R.string.error_occurred),
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Column(
         modifier = modifier,
@@ -31,13 +33,13 @@ fun ErrorText(
         Icon(
             imageVector = Icons.Filled.Error,
             contentDescription = stringResource(R.string.desc_error_icon),
-            tint = MaterialTheme.gradients.purple.onGradients,
+            tint = color,
             modifier = Modifier.size(48.dp),
         )
         Text(
             text = text,
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.gradients.purple.onGradients,
+            color = color,
         )
     }
 }
