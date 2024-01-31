@@ -17,8 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.Card
@@ -47,6 +46,7 @@ import coil.compose.AsyncImage
 import com.itami.weather_app.R
 import com.itami.weather_app.domain.model.Forecast
 import com.itami.weather_app.domain.model.Weather
+import com.itami.weather_app.presentation.ui.common.ErrorText
 import com.itami.weather_app.presentation.ui.theme.gradients
 import com.itami.weather_app.utils.formatTempC
 import com.itami.weather_app.utils.formattedFullDate
@@ -239,38 +239,25 @@ private fun SmallWeatherCard(
 }
 
 @Composable
+private fun ForecastError() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        ErrorText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.error_failed_to_load_current_weather)
+        )
+    }
+}
+
+@Composable
 private fun ForecastLoading() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(color = MaterialTheme.gradients.purple.onGradients)
-    }
-}
-
-@Composable
-private fun ForecastError() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Error,
-                contentDescription = stringResource(R.string.desc_error_icon),
-                tint = MaterialTheme.gradients.purple.onGradients,
-                modifier = Modifier.size(48.dp),
-            )
-            Text(
-                text = stringResource(id = R.string.error_failed_to_load_current_weather),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.gradients.purple.onGradients,
-            )
-        }
     }
 }
 
@@ -300,7 +287,7 @@ private fun TopBar(
                 onClick = onNavigateBackClick
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.desc_arrow_back_icon),
                     modifier = Modifier.size(24.dp),
                 )

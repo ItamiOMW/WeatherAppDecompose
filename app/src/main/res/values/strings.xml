@@ -12,4 +12,5 @@
     <string name="desc_arrow_back_icon">Navigate back icon</string>
     <string name="desc_is_favourite_icon">Is Favourite icon</string>
     <string name="upcoming">Upcoming</string>
+    <string name="error_occurred">Error occurred.</string>
 </resources>
