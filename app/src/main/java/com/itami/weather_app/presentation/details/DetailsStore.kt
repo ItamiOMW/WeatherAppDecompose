@@ -22,7 +22,7 @@ interface DetailsStore : Store<Intent, State, Label> {
     data class State(
         val city: City,
         val isFavourite: Boolean,
-        val forecast: ForecastState,
+        val forecastState: ForecastState,
     ) {
 
         sealed interface ForecastState {
@@ -68,7 +68,7 @@ class DetailsStoreFactory @Inject constructor(
             initialState = State(
                 city = city,
                 isFavourite = false,
-                forecast = State.ForecastState.Initial
+                forecastState = State.ForecastState.Initial
             ),
             bootstrapper = BootstrapperImpl(cityId = city.id),
             executorFactory = ::ExecutorImpl,
@@ -169,15 +169,15 @@ class DetailsStoreFactory @Inject constructor(
                 }
 
                 is Msg.ForecastLoading -> {
-                    copy(forecast = State.ForecastState.Loading)
+                    copy(forecastState = State.ForecastState.Loading)
                 }
 
                 is Msg.ForecastLoaded -> {
-                    copy(forecast = State.ForecastState.Loaded(msg.forecast))
+                    copy(forecastState = State.ForecastState.Loaded(msg.forecast))
                 }
 
                 is Msg.ForecastError -> {
-                    copy(forecast = State.ForecastState.Error)
+                    copy(forecastState = State.ForecastState.Error)
                 }
             }
     }

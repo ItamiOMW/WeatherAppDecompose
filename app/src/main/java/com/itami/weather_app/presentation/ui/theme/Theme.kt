@@ -10,6 +10,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 
+private val colorScheme = lightColorScheme()
+
 private val gradients = Gradients()
 private val LocalGradients = staticCompositionLocalOf { gradients }
 
@@ -21,7 +23,6 @@ val MaterialTheme.gradients: Gradients
 fun WeatherAppDecomposeTheme(
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = lightColorScheme()
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

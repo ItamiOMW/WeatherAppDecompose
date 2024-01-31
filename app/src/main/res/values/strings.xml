@@ -8,4 +8,8 @@
     <string name="button_add_favourite">Add favourite</string>
     <string name="desc_search_icon">Search icon</string>
     <string name="hint_search">Search</string>
+    <string name="desc_error_icon">Error icon</string>
+    <string name="desc_arrow_back_icon">Navigate back icon</string>
+    <string name="desc_is_favourite_icon">Is Favourite icon</string>
+    <string name="upcoming">Upcoming</string>
 </resources>
