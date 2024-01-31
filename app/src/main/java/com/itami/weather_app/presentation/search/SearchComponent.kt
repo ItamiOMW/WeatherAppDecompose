@@ -7,6 +7,10 @@ interface SearchComponent {
 
     val state: StateFlow<SearchStore.State>
 
+    fun onChangeSearchQuery(searchQuery: String)
+
+    fun onSearchClick()
+
     fun onCityClick(city: City)
 
     fun onNavigateBackClick()

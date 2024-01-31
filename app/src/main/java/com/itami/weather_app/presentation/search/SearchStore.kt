@@ -119,6 +119,7 @@ class SearchStoreFactory @Inject constructor(
                                 val cities = response.data
                                 if (cities.isEmpty()) {
                                     dispatch(Msg.SearchStateNotFound)
+                                    return@launch
                                 }
                                 dispatch(Msg.SearchStateFound(cities = cities))
                             }

@@ -48,6 +48,14 @@ class DefaultSearchComponent @AssistedInject constructor(
     override val state: StateFlow<SearchStore.State>
         get() = store.stateFlow
 
+    override fun onChangeSearchQuery(searchQuery: String) {
+        store.accept(SearchStore.Intent.SearchQueryChange(searchQuery))
+    }
+
+    override fun onSearchClick() {
+        store.accept(SearchStore.Intent.SearchClick)
+    }
+
     override fun onCityClick(city: City) {
         store.accept(SearchStore.Intent.CityClick(city))
     }
